@@ -47,7 +47,7 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   },
-  
+
   testing: {
     client: 'sqlite3',
     connection: {
