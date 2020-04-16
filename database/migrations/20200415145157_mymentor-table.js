@@ -30,8 +30,7 @@ exports.up = function(knex) {
             .onUpdate('CASCADE');
         posts.string('image', 255)
         posts.string('description', 255)
-        posts.timestamp('date')
-            .notNullable();
+        posts.timestamps(true, true)
     })
     .createTable('menteeComments', comments => {
         comments.increments();
@@ -44,8 +43,7 @@ exports.up = function(knex) {
             .onUpdate('CASCADE');
         comments.string('message', 255)
             .notNullable()
-        comments.timestamp('date')
-            .notNullable();
+        comments.timestamps(true, true)
     })
     .createTable('mentor', users => {
         users.increments();
@@ -78,7 +76,7 @@ exports.up = function(knex) {
             .onUpdate('CASCADE');
         posts.string('image', 255)
         posts.string('description', 255)
-        posts.timestamp('date')
+        posts.timestamps(true, true)
     })
     .createTable('mentorComments', comments => {
         comments.increments();
@@ -91,8 +89,7 @@ exports.up = function(knex) {
             .onUpdate('CASCADE');
         comments.string('message', 255)
             .notNullable()
-        comments.timestamp('date')
-            .notNullable();
+        comments.timestamps(true, true)
     })
     .createTable('Users', users => {
         users.integer('menteeID')
