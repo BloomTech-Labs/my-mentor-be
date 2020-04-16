@@ -16,6 +16,7 @@ exports.up = function(knex) {
         users.string('email', 50)
             .notNullable()
             .unique();
+        users.string('image', 255)
         users.string('description', 255);
     })
     .createTable('menteePosts', posts => {
@@ -63,6 +64,7 @@ exports.up = function(knex) {
             .notNullable()
         users.string('profession', 30)
             .notNullable()
+        users.string('image', 255)
         users.string('description', 255)
     })
     .createTable('mentorPosts', posts => {
