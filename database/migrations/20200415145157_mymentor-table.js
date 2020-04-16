@@ -16,7 +16,7 @@ exports.up = function(knex) {
         users.string('email', 50)
             .notNullable()
             .unique();
-        users.string('image', 255)
+        users.string('image')
         users.string('description', 255);
     })
     .createTable('menteePosts', posts => {
@@ -28,7 +28,7 @@ exports.up = function(knex) {
             .inTable('mentee')
             .onDelete('RESTRICT')
             .onUpdate('CASCADE');
-        posts.string('image', 255)
+        posts.string('image')
         posts.string('description', 255)
         posts.timestamps(true, true)
     })
@@ -62,7 +62,7 @@ exports.up = function(knex) {
             .notNullable()
         users.string('profession', 30)
             .notNullable()
-        users.string('image', 255)
+        users.string('image')
         users.string('description', 255)
     })
     .createTable('mentorPosts', posts => {
@@ -74,7 +74,7 @@ exports.up = function(knex) {
             .inTable('mentor')
             .onDelete('RESTRICT')
             .onUpdate('CASCADE');
-        posts.string('image', 255)
+        posts.string('image')
         posts.string('description', 255)
         posts.timestamps(true, true)
     })
