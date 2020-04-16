@@ -1,20 +1,26 @@
 const db = require('../database/dbconfig.js');
  
 module.exports = {
+    getMentors,
     getMentor,
-    getMentorById,
+    addMentor,
     updateMentor,
     deleteMentor
 };
 
-function getMentor() {
+function getMentors() {
     return db('mentor');
 }
 
-function getMentorById(id) {
+function getMentor(id) {
     return db('mentor')
     .where({id})
     .first();
+}
+
+function addMentor(user) {
+    return db('mentor')
+    .insert(user)
 }
 
 function updateMentor(id, changes) {
