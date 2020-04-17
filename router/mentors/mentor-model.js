@@ -9,15 +9,18 @@ module.exports = {
 };
 
 function getMentors() {
-    return db('mentor');
+    return db('mentor')
+    .select('first_name', 'last_name', 'city', 'state', 'profession', 'image', 'description', 'email');
 }
 
 function getMentor(id) {
     return db('mentor')
+    .select('first_name', 'last_name', 'city', 'state', 'profession', 'image', 'description', 'email')
     .where({id})
     .first();
 }
 
+//these down will need authentication 
 function addMentor(user) {
     return db('mentor')
     .insert(user)
