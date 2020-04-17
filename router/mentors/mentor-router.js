@@ -2,7 +2,7 @@ const router = require('express').Router();
 const db = require('./mentor-model');
 middleware = require('./middleware');
 
-// GET mentor/
+
 router.get('/', (req, res) => {
     db.getMentors()
     .then(mentors => {
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
         res.status(500).json(err)
     })
 });
-//GET /mentor/:id
+
 router.get('/:id', middleware.validateUserId, (req, res) => {
     const id = req.params.id;
     db.getMentor(id)
@@ -23,7 +23,7 @@ router.get('/:id', middleware.validateUserId, (req, res) => {
         res.status(500).json({errorMessage: 'Could not retrieve specified ID'})
     })
 });
-//Post /mentor
+
 router.post('/', middleware.validateUser, (req, res) => {
     const body = req.body;
     db.addMentor(body)

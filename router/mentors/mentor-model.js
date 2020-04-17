@@ -20,7 +20,7 @@ function getMentor(id) {
     .first();
 }
 
-//these down will need authentication 
+ 
 function addMentor(user) {
     return db('mentor')
     .insert(user)
