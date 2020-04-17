@@ -4,7 +4,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const server = express();
 
-const userRouter = require('../users/users-router');
+const userRouter = require('../router/users/users-router');
 const mentorRouter = require("../router/mentors/mentor-router");
 
 server.use(helmet());
