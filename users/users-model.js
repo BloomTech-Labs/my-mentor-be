@@ -1,4 +1,4 @@
-const db = require('../database/dbconfig.js');
+const db = require('../database/dbconfig');
 
 module.exports = {
     find,
@@ -9,7 +9,7 @@ module.exports = {
 
 function find() {
     return db('users')
-        .select('id', 'username')
+        // .select('id', 'username')
 }
 
 function update(id, user) {
