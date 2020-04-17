@@ -9,7 +9,7 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('/mentor', mentorRouter)
+server.use('/api/mentor', mentorRouter)
 server.get('/', (req, res) => {
     res.send(`My Mentor API`)
 });
