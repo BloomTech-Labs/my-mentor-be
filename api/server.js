@@ -16,4 +16,22 @@ server.get('/', (req, res) => {
 
 server.use(express.json());
 
+server.get('/token', (req, res) => {
+  
+  const payload = {
+    subject: 'thisuser',
+    userid: 'user.id',
+  },
+
+  const secret = 'wombat';
+  const options = {
+    expiresIn: '1h'
+  };
+
+  const token = jwt.sign(payload, secret, options);
+
+  res.json(token);
+});
+
+
 module.exports = server;
