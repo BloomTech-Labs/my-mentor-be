@@ -21,7 +21,7 @@ server.get('/token', (req, res) => {
   const payload = {
     subject: 'thisuser',
     userid: 'user.id',
-  },
+  };
 
   const secret = 'wombat';
   const options = {
