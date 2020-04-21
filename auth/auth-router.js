@@ -6,7 +6,7 @@ const Users = require('../users/users-model');
 // ======================================================================
 router.post('/register', (req,res) => {
   let data = req.body;
-  const hash = bcrypt.hashSync(data.password,12);
+  const hash = bcrypt.hashSync(data.password,8);
   data.password = hash;
 
   Users.add(data)
@@ -21,7 +21,7 @@ router.post('/register', (req,res) => {
 });
 // ====================================================================
 router.post('/login', (req,res) => {
-  // I am not showing "username" in the tables. So i am using Email for now
+
   const { email, password } = req.body;
 
   Users.findBy({ email })

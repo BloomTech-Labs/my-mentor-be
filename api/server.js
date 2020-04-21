@@ -2,7 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-// const authRouter = require("../");
+const authRouter = require("../auth/auth-router");
 const server = express();
 
 const userRouter = require('../users/users-router');
@@ -12,6 +12,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api/users', userRouter);
+server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => {
     res.send(`My Mentor API`)
