@@ -30,15 +30,16 @@ To get the server running locally:
 
 ## 2️⃣ Endpoints
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
-#### Organization Routes
+#### Mentor Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+| GET    | `/api/mentor/`          | all users      | Returns non-private info for all mentors     |
+| GET    | `/api/mentor/:mentorId` | all users      | Returns non-private info for a single mentor |
+| POST   | `/api/mentor/`          | user           | Creates a new mentor                         |
+| PUT    | `/api/mentor/:mentorId` | user           | Modify an existing mentor by ID.             |
+| DELETE | `/api/mentor/:mentorId` | user           | Deletes everything dependent on the mentor   |
 
 #### User Routes
 
@@ -53,20 +54,22 @@ To get the server running locally:
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
-
-#### 2️⃣ ORGANIZATIONS
+#### 2️⃣ MENTORS
 
 ---
 
 ```
 {
   id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
+  first_name: STRING
+  last_name: STRING
+  city: STRING
+  state: STRING
+  profession: STRING
+  image: STRING
+  description: STRING
+  email: STRING
+  password: STRING
 }
 ```
 
@@ -92,17 +95,16 @@ To get the server running locally:
 
 ## 2️⃣ Actions
 
-🚫 This is an example, replace this with the actions that pertain to your backend
 
-`getOrgs()` -> Returns all organizations
+`getMentors()` -> Returns all mentors
 
-`getOrg(orgId)` -> Returns a single organization by ID
+`getMentor(mentorId)` -> Returns a single mentor by mentor ID
 
-`addOrg(org)` -> Returns the created org
+`addMentor(user object)` -> Creates a new mentor and returns the user
 
-`updateOrg(orgId)` -> Update an organization by ID
+`updateMentor(mentorId, changes object)` -> Update a single mentor by ID
 
-`deleteOrg(orgId)` -> Delete an organization by ID
+`deleteMentor(mentorId)` -> Deletes everything dependent on the mentor
 <br>
 <br>
 <br>
