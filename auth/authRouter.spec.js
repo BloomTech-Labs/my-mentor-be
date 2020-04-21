@@ -1,7 +1,7 @@
 const request = require('supertest');
 const server = require('../api/server');
 const db = require('../database/dbconfig');
-const User = require('../users/users-model');
+const User = require('..router/users/users-model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
