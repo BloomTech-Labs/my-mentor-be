@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Mentees = require('./mentee-model');
+const Mentees = require('./mentees-model');
 
 router.get('/', (req, res) => {
     Mentees.getMentees()
@@ -30,6 +30,18 @@ router.put('/:id', (req, res) => {
         })
 })
 
+router.post('/', (req, res) => {
+    const menteeData = req.body;
+    
+    Mentees.addMentee(menteeData)
+    .then(mentee => {
+      res.status(201).json(mentee);
+    })
+    .catch (err => {
+      res.status(500).json({ message: 'Failed to create new mentee' });
+    });
+});
+  
 router.delete('/:id', (req,res) => {
     
     const id = req.params.id;

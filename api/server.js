@@ -6,12 +6,14 @@ const server = express();
 
 const userRouter = require('../router/users/users-router');
 const mentorRouter = require("../router/mentors/mentor-router");
+const menteeRouter = require("../router/mentees/mentees-router");
 
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('/api/mentor', mentorRouter)
+server.use('/api/mentee', menteeRouter);
+server.use('/api/mentor', mentorRouter);
 server.use('/api/users', userRouter);
 
 server.get('/', (req, res) => {

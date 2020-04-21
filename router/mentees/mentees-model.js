@@ -10,12 +10,12 @@ module.exports = {
 
 function getMentees() {
     return db('mentee')
-    .select('first_name', 'last_name', 'city', 'state', 'profession', 'image', 'description', 'email');
+    .select('first_name', 'last_name', 'city', 'state', 'email', 'image', 'description');
 };
 
 function getMentee(id) {
     return db('mentee')
-    .select('first_name', 'last_name', 'city', 'state', 'profession', 'image', 'description', 'email')
+    .select('first_name', 'last_name', 'city', 'state', 'email', 'image', 'description')
     .where({id})
     .first();
 }
