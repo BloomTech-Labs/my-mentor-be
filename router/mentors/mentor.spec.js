@@ -26,6 +26,17 @@ const incomplete_creds = {
     email: null,
     password: 'test'
 }
+const updated_user_creds = {
+    first_name: 'testuser',
+    last_name: 'testuser',
+    city: 'tester',
+    state: 'tester',
+    profession: 'tester',
+    image: 'tester',
+    description: 'tester',
+    email: 'tester',
+    password: 'tester'
+}
 beforeEach(async() => {
     await db('mentor').truncate;
 
@@ -37,7 +48,7 @@ describe('Mentor Tests', () => {
         expect(1).toBe(1)
     })
     
-    describe('POST /mentor', () => {
+    describe('POST api/mentor', () => {
         it('Register mentor with incomplete credentials', async() => {
             const expectedStatusCode = 500;
             let res = await request(server)
@@ -61,7 +72,7 @@ describe('Mentor Tests', () => {
         })
     })
 
-    describe('GET /mentor', () => {
+    describe('GET api/mentor', () => {
         it('Returns all mentors', async() => {
             const expectedStatusCode = 200;
             const res = await request(server)
@@ -74,7 +85,7 @@ describe('Mentor Tests', () => {
             expect(res.type).toMatch(/json/)
         })
     })
-    describe('GET /mentor/:id', () => {
+    describe('GET api/mentor/:id', () => {
         it('Returns all mentors by ID', async() => {
             const expectedStatusCode = 200;
             const res = await request(server)
@@ -84,7 +95,38 @@ describe('Mentor Tests', () => {
         it('Returns a JSON', async() => {
             const res = await request(server)
                 .get('/api/mentor')
-            expect(res.type).toMatch(/json/)
+                .set('Content-Type', 'application/json')
+                .expect('Content-Type', /json/)
+        })
+    })
+    describe('PUT api/mentor/:id', () => {
+        it('Modifies an existing mentor by ID', async() => {
+            const expectedStatusCode = 201;
+            const res = await request(server)
+                .put('/api/mentor/1')
+                .send(updated_user_creds)
+            expect(res.status).toBe(expectedStatusCode)
+        })
+        it('Returns an error if mentor does not exist', async() => {
+            const expectedStatusCode = 404;
+            const res = await request(server)
+                .put('/api/mentor/2')
+                .send(updated_user_creds)
+            expect(res.status).toBe(expectedStatusCode)
+        })
+    })
+    describe('DELETE /api/mentor/:id', () => {
+        it('Deletes everything dependent on the mentor', async() => {
+            const expectedStatusCode = 200;
+            const res = await request(server)
+                .delete('/api/mentor/1')
+            expect(res.status).toBe(expectedStatusCode)
+        })
+        it('Returns an error if mentor does not exist', async() => {
+            const expectedStatusCode = 404;
+            const res = await request(server)
+                .delete('/api/mentor/2')
+            expect(res.status).toBe(expectedStatusCode)
         })
     })
 })
