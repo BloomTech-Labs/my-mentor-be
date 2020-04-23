@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const db = require('./mentor-model');
 middleware = require('./middleware');
+const authorized = require('../../auth/auth-middleware.js');
 
 
-router.get('/', (req, res) => {
+router.get('/', authorized, (req, res) => {
     db.getMentors()
     .then(mentors => {
         res.status(200).json(mentors)
@@ -13,7 +14,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:id', middleware.validateUserId, (req, res) => {
+router.get('/:id', authorized, (req, res) => {
     const id = req.params.id;
     db.getMentor(id)
     .then(id => {
@@ -24,7 +25,7 @@ router.get('/:id', middleware.validateUserId, (req, res) => {
     })
 });
 
-router.post('/', middleware.validateUser, (req, res) => {
+router.post('/', authorized, (req, res) => {
     const body = req.body;
     db.addMentor(body)
     .then(user => {
@@ -35,7 +36,7 @@ router.post('/', middleware.validateUser, (req, res) => {
     })
 })
 
-router.put('/:id', middleware.validateUserId, middleware.validateUser, (req,res) => {
+router.put('/:id', authorized, (req,res) => {
     const id = req.params.id;
     const changes = req.body;
     db.updateMentor(id, changes)
@@ -47,7 +48,7 @@ router.put('/:id', middleware.validateUserId, middleware.validateUser, (req,res)
     })
 })
 
-router.delete('/:id', middleware.validateUserId, (req, res) => {
+router.delete('/:id', authorized, (req, res) => {
     const id = req.params.id;
     db.deleteMentor(id)
     .then(user => {
