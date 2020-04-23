@@ -11,8 +11,8 @@ module.exports = {
 
 function find() {
     return db('users')
-        // .select('id', 'username')
-};
+        // .select('id', 'email')
+}
 
 function update(id, user) {
     db('users')
