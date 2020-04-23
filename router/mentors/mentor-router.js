@@ -10,7 +10,8 @@ router.get('/', authorized, (req, res) => {
         res.status(200).json(mentors)
     })
     .catch(err => {
-        res.status(500).json(err)
+        res.status(500).json(err);
+        console.log(err);
     })
 });
 

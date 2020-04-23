@@ -18,6 +18,6 @@ module.exports = ( req,res,next ) => {
           }
         })
       } else {
-        res.status(401).json({ message: "Username does not exist" });
+        res.status(401).json({ message: "You must register / login first!" });
       }
     }

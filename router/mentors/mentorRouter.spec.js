@@ -24,6 +24,3 @@ describe('should register a new user', () => {
    })
 });
 // ============================================================
-beforeEach( async () => {
-   await db ('mentor').truncate();
-})

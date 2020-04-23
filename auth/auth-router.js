@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const secrets = require('../config/secret');
 const Users = require('../router/users/users-model');
+const Mentors = require('../router/mentors/mentor-model');
+// ***Pick up here tomorrow, need to change all of the Users into Mentors**
 // ======================================================================
 router.post('/register', (req,res) => {
   let data = req.body;
