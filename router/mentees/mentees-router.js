@@ -9,6 +9,20 @@ router.get('/', (req, res) => {
         .catch(err => res.send(err));
 });
 
+router.get('/:id', (req, res) => {
+    const {id} = req.params;
+    Mentees.getMentee(id)
+        .then(mentee => {
+            if(!mentee){
+                res.status(404).json({message: "Sorry no Mentee with the given ID"});
+            } else {
+                res.status(200).json(mentee)
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
+})
 router.put('/:id', (req, res) => {
 
     const {id} = req.params;
