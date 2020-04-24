@@ -24,7 +24,6 @@ router.get('/:id', (req, res) => {
         })
 })
 router.put('/:id', (req, res) => {
-
     const {id} = req.params;
     const changes = req.body;
 
@@ -57,15 +56,14 @@ router.post('/', (req, res) => {
 });
   
 router.delete('/:id', (req,res) => {
-    
     const id = req.params.id;
-
-    if (!id) {
-        res.status(404).json({message: "Mentee id not valid"})
-    }
     Mentees.deleteMentee(id)
         .then(mentee => {
-            res.json(mentee)
+            if (!mentee) {
+                res.status(404).json({message: "Mentee id not valid"})
+            } else {
+                res.status(200).json(mentee)
+            }
         })
         .catch(err => {
             res.status(500).json({message: "Not able to delete mentee"})

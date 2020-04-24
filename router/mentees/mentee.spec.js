@@ -92,5 +92,41 @@ describe('Mentee Tests', () => {
                 .set('Content-Type', 'application/json')
                 .expect('Content-Type', /json/)
         })
+        it('Returns an error if mentee does not exist', async() => {
+            const expectedStatusCode = 404;
+            const res = await request(server)
+                .get('/api/mentee/2')
+            expect(res.status).toBe(expectedStatusCode)
+        })
+    })
+    describe('PUT api/mentee/:id', () => {
+        it('Modifies an existing mentee by ID', async() => {
+            const expectedStatusCode = 200;
+            const res = await request(server)
+                .put('/api/mentee/1')
+                .send(updated_user_creds)
+            expect(res.status).toBe(expectedStatusCode)
+        })
+        it('Returns an error if mentee does not exist', async() => {
+            const expectedStatusCode = 404;
+            const res = await request(server)
+                .put('/api/mentee/2')
+                .send(updated_user_creds)
+            expect(res.status).toBe(expectedStatusCode)
+        })
+    })
+    describe('DELETE /api/mentee/:id', () => {
+        it('Deletes everything dependent on the mentee', async() => {
+            const expectedStatusCode = 200;
+            const res = await request(server)
+                .delete('/api/mentee/1')
+            expect(res.status).toBe(expectedStatusCode)
+        })
+        it('Returns an error if mentee does not exist', async() => {
+            const expectedStatusCode = 404;
+            const res = await request(server)
+                .delete('/api/mentee/5')
+            expect(res.status).toBe(expectedStatusCode)
+        })
     })
 })
