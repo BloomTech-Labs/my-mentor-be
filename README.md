@@ -1,29 +1,20 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
 # API Documentation
 
-#### 1️⃣ Backend deployed at [🚫name service here](🚫add URL here) <br>
+#### 1️⃣ Backend deployed at [mentor-be](https://mentor-be.herokuapp.com/) <br>
 
 ## 1️⃣ Getting started
 
 To get the server running locally:
 
-🚫 adjust these scripts to match your project
-
 - Clone this repo
 - **npm install** to install all required dependencies
 - **npm run server** to start the local server
-- **npm test** to start server using testing environment
+- **npm run test** to start server using testing environment
 
-### Backend framework goes here
+### Backend framework
 
-🚫 Why did you choose this framework?
-
--    Point One
+-    Node/Express
 -    Point Two
 -    Point Three
 -    Point Four
@@ -35,26 +26,25 @@ To get the server running locally:
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/api/mentor/`          | all users      | Returns non-private info for all mentors     |
-| GET    | `/api/mentor/:mentorId` | all users      | Returns non-private info for a single mentor |
+| GET    | `/api/mentor/`          | all users      | Returns all mentors                          |
+| GET    | `/api/mentor/:mentorId` | all users      | Returns a single mentor by Id                |
 | POST   | `/api/mentor/`          | user           | Creates a new mentor                         |
 | PUT    | `/api/mentor/:mentorId` | user           | Modify an existing mentor by ID.             |
 | DELETE | `/api/mentor/:mentorId` | user           | Deletes everything dependent on the mentor   |
 
-#### User Routes
+#### Mentee Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| GET    | `/api/mentee/`          | all users           | Returns all mentees                                |
+| GET    | `/api/mentee/:menteeId` | all users           | Returns a single mentee by ID                      |
+| POST   | `/api/mentee/`          | user                | Creates a new mentee by ID                         |
+| PUT    | `/api/mentee/:menteeId` | user                | Modify an existing mentee by ID                    |
+| DELETE | `/api/mentee/:menteeId` | user                | Deletes everything dependent on the mentee         |
 
 # Data Model
 
-#### 2️⃣ MENTORS
+#### MENTORS
 
 ---
 
@@ -73,23 +63,21 @@ To get the server running locally:
 }
 ```
 
-#### USERS
+#### MENTEES
 
 ---
 
 ```
 {
   id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
   first_name: STRING
   last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
+  city: STRING
+  state: STRING
+  image: STRING
+  description: STRING
   email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  password: STRING
 }
 ```
 
@@ -108,15 +96,16 @@ To get the server running locally:
 <br>
 <br>
 <br>
-`getUsers(orgId)` -> if no param all users
 
-`getUser(userId)` -> Returns a single user by user ID
+`getMentees()` -> Returns all mentees
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
+`getMentee(mentorId)` -> Returns a single mentee by mentee ID
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+`addMentee(user object)` -> Creates a new mentee and returns the user
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+`updateMentee(menteeId, changes object)` -> Update a single mentee by ID
+
+`deleteMentee(menteeId)` -> Deletes everything dependent on the mentee
 
 ## 3️⃣ Environment Variables
 
@@ -170,5 +159,5 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/Lambda-School-Labs/my-mentor-fe/blob/master/README.md) for details on the frontend of our project.
+
