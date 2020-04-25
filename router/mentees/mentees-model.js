@@ -5,7 +5,8 @@ module.exports = {
     getMentee,
     addMentee,
     updateMentee,
-    deleteMentee
+    deleteMentee,
+    findMentee
 };
 
 function getMentees() {
@@ -18,7 +19,12 @@ function getMentee(id) {
     .select('first_name', 'last_name', 'city', 'state', 'email', 'image', 'description')
     .where({id})
     .first();
-}
+};
+
+function findMentee(filter) {
+    return db('mentee')
+    .where(filter);
+};
 
  
 function addMentee(user) {
