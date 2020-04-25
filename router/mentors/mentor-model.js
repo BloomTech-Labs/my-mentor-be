@@ -5,7 +5,8 @@ module.exports = {
     getMentor,
     addMentor,
     updateMentor,
-    deleteMentor
+    deleteMentor,
+    findMentor
 };
 
 function getMentors() {
@@ -18,6 +19,11 @@ function getMentor(id) {
     .select('first_name', 'last_name', 'city', 'state', 'profession', 'image', 'description', 'email')
     .where({id})
     .first();
+}
+
+function findMentor(filter) {
+    return db('mentor')
+    .where(filter);
 }
 
  

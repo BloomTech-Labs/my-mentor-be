@@ -6,41 +6,41 @@ const Users = require('../router/users/users-model');
 const Mentors = require('../router/mentors/mentor-model');
 
 // =================== User Register ========================================
-router.post('/register', (req,res) => {
-  let data = req.body;
-  const hash = bcrypt.hashSync(data.password,8);
-  data.password = hash;
+// router.post('/register', (req,res) => {
+//   let data = req.body;
+//   const hash = bcrypt.hashSync(data.password,8);
+//   data.password = hash;
 
-  Users.add(data)
-    .then(saved => {
-      const token = genToken(saved);
-      res.status(201).json({ created_user: saved, token: token });
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(501).json(error);
-    });
-});
+//   Users.add(data)
+//     .then(saved => {
+//       const token = genToken(saved);
+//       res.status(201).json({ created_user: saved, token: token });
+//     })
+//     .catch(error => {
+//       console.log(error);
+//       res.status(501).json(error);
+//     });
+// });
 // ==================== User Login =========================================
-router.post('/login', (req,res) => {
+// router.post('/login', (req,res) => {
 
-  const { email, password } = req.body;
+//   const { email, password } = req.body;
 
-  Users.findBy({ email })
-    .first()
-    .then(log => {
-      if (log && bcrypt.compareSync(password, log.password)) {
-        const token = genToken(log);
-          res.status(200).json({ email: log.email, token: token });
-      } else {
-        res.status(401).json({ message: 'Invalid Credentials '});
-      }
-    })
-    .catch (err => {
-      console.log(err);
-      res.status(500).json({ message: 'user error', err });
-    });
-});
+//   Users.findBy({ email })
+//     .first()
+//     .then(log => {
+//       if (log && bcrypt.compareSync(password, log.password)) {
+//         const token = genToken(log);
+//           res.status(200).json({ email: log.email, token: token });
+//       } else {
+//         res.status(401).json({ message: 'Invalid Credentials '});
+//       }
+//     })
+//     .catch (err => {
+//       console.log(err);
+//       res.status(500).json({ message: 'user error', err });
+//     });
+// });
 // ====================== Mentor Register =============================================
 router.post('/register/mentor', (req,res) => {
   let data = req.body;
@@ -49,8 +49,8 @@ router.post('/register/mentor', (req,res) => {
 
   Mentors.addMentor(data)
     .then(saved => {
-      const token = genToken(saved);
-      res.status(201).json({ created_mentor: saved, token: token });
+      // const token = genToken(saved);
+      res.status(201).json({ created_mentor: saved });
     })
     .catch(error => {
       console.log(error);
@@ -62,13 +62,13 @@ router.post('/login/mentor', (req,res) => {
 
   const { email, password } = req.body;
 
-  Mentors.getMentor({ email })
+  Mentors.findMentor({ email })
     .first()
     .then(log => {
       if (log && bcrypt.compareSync(password, log.password)) {
-        req.session.loggedin = true;
+        // req.session.loggedin = true;
         const token = genToken(log);
-          res.status(200).json({ email: log.email, token: token });
+          res.status(200).json({ email: log.email, token: token, });
       } else {
         res.status(401).json({ message: 'Invalid Credentials '});
       }
@@ -86,9 +86,8 @@ function genToken(user) {
   };
   
   const options = { expiresIn: '1h' };
-  const token = jwt.sign(payload, secrets.jwtSecret, options);
 
-  return token;
+  return jwt.sign(payload, secrets.jwtSecret, options);
 }
 // ==========================================================================================
 // ========================= Mentor Token ========================================
