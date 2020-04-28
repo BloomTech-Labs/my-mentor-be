@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', middleware.validateUserId, (req, res) => {
     const id = req.params.id;
     db.getMentor(id)
     .then(id => {
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
     })
 });
 
-router.post('/', (req, res) => {
+router.post('/', middleware.validateUser, (req, res) => {
     const body = req.body;
     db.addMentor(body)
     .then(user => {
@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
     })
 })
 
-router.put('/:id',(req,res) => {
+router.put('/:id',middleware.validateUser,middleware.validateUserId, (req,res) => {
     const id = req.params.id;
     const changes = req.body;
     db.updateMentor(id, changes)
@@ -49,7 +49,7 @@ router.put('/:id',(req,res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', middleware.validateUserId, (req, res) => {
     const id = req.params.id;
     db.deleteMentor(id)
     .then(user => {
