@@ -17,7 +17,7 @@ server.use(express.json());
 server.use('/api/mentee', authorized, menteeRouter);
 server.use('/api/mentor', authorized, mentorRouter);
 server.use('/api/users', authorized, userRouter);
-server.use('/api/auth', authorized, authRouter);
+server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => {
     res.send(`My Mentor API`)
