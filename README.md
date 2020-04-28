@@ -28,7 +28,6 @@ To get the server running locally:
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
 | GET    | `/api/mentor/`          | all users      | Returns all mentors                          |
 | GET    | `/api/mentor/:mentorId` | all users      | Returns a single mentor by Id                |
-| POST   | `/api/mentor/`          | user           | Creates a new mentor                         |
 | PUT    | `/api/mentor/:mentorId` | user           | Modify an existing mentor by ID.             |
 | DELETE | `/api/mentor/:mentorId` | user           | Deletes everything dependent on the mentor   |
 
@@ -38,7 +37,6 @@ To get the server running locally:
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
 | GET    | `/api/mentee/`          | all users           | Returns all mentees                                |
 | GET    | `/api/mentee/:menteeId` | all users           | Returns a single mentee by ID                      |
-| POST   | `/api/mentee/`          | user                | Creates a new mentee by ID                         |
 | PUT    | `/api/mentee/:menteeId` | user                | Modify an existing mentee by ID                    |
 | DELETE | `/api/mentee/:menteeId` | user                | Deletes everything dependent on the mentee         |
 
@@ -74,6 +72,7 @@ To get the server running locally:
   last_name: STRING
   city: STRING
   state: STRING
+  title: STRING
   image: STRING
   description: STRING
   email: STRING
