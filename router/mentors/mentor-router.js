@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const db = require('./mentor-model');
 middleware = require('./middleware');
-const authorized = require('../../auth/auth-middleware.js');
 
 
-router.get('/', authorized, (req, res) => {
+
+router.get('/', (req, res) => {
     db.getMentors()
     .then(mentors => {
         res.status(200).json(mentors)
@@ -15,7 +15,7 @@ router.get('/', authorized, (req, res) => {
     })
 });
 
-router.get('/:id', authorized, (req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id;
     db.getMentor(id)
     .then(id => {
@@ -26,7 +26,7 @@ router.get('/:id', authorized, (req, res) => {
     })
 });
 
-router.post('/', authorized, (req, res) => {
+router.post('/', (req, res) => {
     const body = req.body;
     db.addMentor(body)
     .then(user => {
@@ -37,7 +37,7 @@ router.post('/', authorized, (req, res) => {
     })
 })
 
-router.put('/:id', authorized, (req,res) => {
+router.put('/:id',(req,res) => {
     const id = req.params.id;
     const changes = req.body;
     db.updateMentor(id, changes)
@@ -49,7 +49,7 @@ router.put('/:id', authorized, (req,res) => {
     })
 })
 
-router.delete('/:id', authorized, (req, res) => {
+router.delete('/:id', (req, res) => {
     const id = req.params.id;
     db.deleteMentor(id)
     .then(user => {
