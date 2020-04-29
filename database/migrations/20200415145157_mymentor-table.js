@@ -16,6 +16,7 @@ exports.up = function(knex) {
         users.string('email', 50)
             .notNullable()
             .unique();
+        users.string('title', 30)
         users.string('image')
         users.string('description', 255);
     })
