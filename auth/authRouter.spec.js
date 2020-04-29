@@ -46,19 +46,19 @@ describe('should register a new mentor', () => {
    })
 });
 // ================= Mentor Login ================================
-describe('POST /login', () => {
-  it('should accept valid credentials', async () => {
-      await createMentor("Hawkeye","arrow");
-      const res = await request(server).post('/api/auth/login/mentor')
-      .send({
-          "email": "Hawkeye",
-          "password": "arrow"
-      });
-      console.log(res.body);
-      expect(res.type).toEqual('application/json');
-      expect(res.status).toEqual(200);
-  });
-}); 
-beforeEach( async () => {
-   await db ('mentor').truncate();
-})
+// describe('POST /login', () => {
+//   it('should accept valid credentials', async () => {
+//       await createMentor("Hawkeye","arrow");
+//       const res = await request(server).post('/api/auth/login/mentor')
+//       .send({
+//           "email": "Hawkeye",
+//           "password": "arrow"
+//       });
+//       console.log(res.body);
+//       expect(res.type).toEqual('application/json');
+//       expect(res.status).toEqual(200);
+//   });
+// }); 
+// beforeEach( async () => {
+//    await db ('mentor').truncate();
+// })
