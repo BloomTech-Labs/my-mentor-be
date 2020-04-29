@@ -2,6 +2,7 @@ const request = require('supertest');
 const server = require('../api/server');
 const db = require('../database/dbconfig');
 const Mentor = require('../router/mentors/mentor-model');
+const Mentee = require('../router/mentees/mentees-model')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -9,12 +10,13 @@ const jwt = require('jsonwebtoken');
 async function createMentor(email, password) {
   const mentor = {
     email: email,
-    password: bcrypt.hashSync(password, 8)
+    // password: bcrypt.hashSync(password, 8)
+    password: password
   };
   await Mentor.addMentor(mentor)
 }
 // ==================== genToken ==============================
-function genToken(parent) {
+function genToken(user) {
   const payload = {
     userid: user.id,
     email: user.email,
@@ -46,19 +48,38 @@ describe('should register a new mentor', () => {
    })
 });
 // ================= Mentor Login ================================
-// describe('POST /login', () => {
-//   it('should accept valid credentials', async () => {
-//       await createMentor("Hawkeye","arrow");
-//       const res = await request(server).post('/api/auth/login/mentor')
-//       .send({
-//           "email": "Hawkeye",
-//           "password": "arrow"
-//       });
-//       console.log(res.body);
-//       expect(res.type).toEqual('application/json');
-//       expect(res.status).toEqual(200);
-//   });
-// }); 
-// beforeEach( async () => {
-//    await db ('mentor').truncate();
-// })
+describe('POST /login', () => {
+  it('should accept valid credentials', async () => {
+      await createMentor("Hawkeye","arrow");
+      const res = await request(server).post('/api/auth/login/mentor')
+      .send({
+          "email": "Hawkeye",
+          "password": "arrow"
+      });
+      console.log(res.body);
+      expect(res.type).toEqual('application/json');
+      expect(res.status).toEqual(200);
+  });
+}); 
+// ================= Mentee Register ================================
+describe('should register a new mentee', () => {
+  it('should return a JSON', async () => {
+     const res = await request(server).post('/api/auth/register/mentee')
+     .send({
+      "first_name": "James",
+      "last_name": "Buchanan",
+      "city": "Brooklyn",
+      "state": "New York",
+      "password": "bucky",
+      "email": "WinterSoldier"
+     });
+     console.log(res.body);
+     expect(res.type).toEqual('application/json');
+     expect(res.status).toEqual(201);
+  })
+});
+// ============================================================================
+beforeEach( async () => {
+   await db ('mentor', 'mentee').truncate();
+});
+

@@ -67,9 +67,9 @@ router.post('/login/mentor', (req,res) => {
     .first()
     .then(log => {
       if (log && bcrypt.compareSync(password, log.password)) {
-        // req.session.loggedin = true;
+        req.session.loggedin = true;
         const token = genToken(log);
-          res.status(200).json({ email: log.email, token: token, });
+          res.status(200).json({ email: log.email, token: token });
       } else {
         res.status(401).json({ message: 'Invalid Credentials '});
       }
