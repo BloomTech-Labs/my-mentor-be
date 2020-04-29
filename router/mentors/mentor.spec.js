@@ -37,6 +37,9 @@ const updated_user_creds = {
     email: 'tester',
     password: 'tester'
 }
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vyc2lkIjoxLCJ1c2VycyI6InRlc3QiLCJpYXQiOjE1ODgxODg4OTEsImV4cCI6MTU4ODE5MjQ5MX0.V7o_BmJAkDqwtp9w2xFk4V98X5PM7F_XQVbNi4r8c2c"
+
+
 beforeEach(async() => {
     await db('mentor').truncate;
 
@@ -48,25 +51,25 @@ describe('Mentor Tests', () => {
         expect(1).toBe(1)
     })
     
-    describe('POST api/mentor', () => {
+    describe('Registering a mentor', () => {
         it('Register mentor with incomplete credentials', async() => {
-            const expectedStatusCode = 500;
+            const expectedStatusCode = 501;
             let res = await request(server)
-                .post('/api/mentor/')
+                .post('/api/auth/register/mentor')
                 .send(incomplete_creds)
             expect(res.status).toBe(expectedStatusCode)
         })
         it('Register mentor', async() => {
             const expectedStatusCode = 201;
             const res = await request(server)
-                .post('/api/mentor')
+                .post('/api/auth/register/mentor')
                 .send(good_user_creds)
             expect(res.status).toBe(expectedStatusCode)
         })
         it('Registering with the same credentials, expecting failure', async() => {
-            const expectedStatusCode = 500;
+            const expectedStatusCode = 501;
             const res = await request(server)
-                .post('/api/mentor')
+                .post('/api/auth/register/mentor')
                 .send(good_user_creds)
             expect(res.status).toBe(expectedStatusCode)
         })
@@ -77,11 +80,13 @@ describe('Mentor Tests', () => {
             const expectedStatusCode = 200;
             const res = await request(server)
                 .get('/api/mentor')
+                .set('Authorization', token)
             expect(res.status).toBe(expectedStatusCode)
         })
         it('Returns a JSON', async() => {
             const res = await request(server)
                 .get('/api/mentor')
+                .set('Authorization', token)
             expect(res.type).toMatch(/json/)
         })
     })
@@ -90,12 +95,14 @@ describe('Mentor Tests', () => {
             const expectedStatusCode = 200;
             const res = await request(server)
                 .get('/api/mentor/1')
+                .set('Authorization', token)
             expect(res.status).toBe(expectedStatusCode)
         })
         it('Returns a JSON', async() => {
             const res = await request(server)
                 .get('/api/mentor')
                 .set('Content-Type', 'application/json')
+                .set('Authorization', token)
                 .expect('Content-Type', /json/)
         })
     })
@@ -105,6 +112,7 @@ describe('Mentor Tests', () => {
             const res = await request(server)
                 .put('/api/mentor/1')
                 .send(updated_user_creds)
+                .set('Authorization', token)
             expect(res.status).toBe(expectedStatusCode)
         })
         it('Returns an error if mentor does not exist', async() => {
@@ -112,6 +120,7 @@ describe('Mentor Tests', () => {
             const res = await request(server)
                 .put('/api/mentor/2')
                 .send(updated_user_creds)
+                .set('Authorization', token)
             expect(res.status).toBe(expectedStatusCode)
         })
     })
@@ -120,12 +129,14 @@ describe('Mentor Tests', () => {
             const expectedStatusCode = 200;
             const res = await request(server)
                 .delete('/api/mentor/1')
+                .set('Authorization', token)
             expect(res.status).toBe(expectedStatusCode)
         })
         it('Returns an error if mentor does not exist', async() => {
             const expectedStatusCode = 404;
             const res = await request(server)
                 .delete('/api/mentor/2')
+                .set('Authorization', token)
             expect(res.status).toBe(expectedStatusCode)
         })
     })
