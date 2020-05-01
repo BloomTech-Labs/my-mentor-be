@@ -10,8 +10,7 @@ const jwt = require('jsonwebtoken');
 async function createMentor(email, password) {
   const mentor = {
     email: email,
-    // password: bcrypt.hashSync(password, 8)
-    password: password
+    password: bcrypt.hashSync(password, 8)
   };
   await Mentor.addMentor(mentor)
 }
@@ -21,7 +20,7 @@ function genToken(user) {
     userid: user.id,
     email: user.email,
 
-    roles: ['Mentor']
+    roles: ['mentor', 'mentee']
   };
 
   const options = { expiresIn: '1h' };
@@ -47,13 +46,13 @@ describe('should register a new mentor', () => {
       expect(res.status).toEqual(201);
    })
 });
-// ================= Mentor Login ================================
+// ================= Mentor Login Test ================================
 describe('POST /login', () => {
   it('should accept valid credentials', async () => {
       await createMentor("Hawkeye","arrow");
       const res = await request(server).post('/api/auth/login/mentor')
       .send({
-          "email": "Hawkeye",
+          "email": "Hawkeye@gmail.com",
           "password": "arrow"
       });
       console.log(res.body);
@@ -61,7 +60,8 @@ describe('POST /login', () => {
       expect(res.status).toEqual(200);
   });
 }); 
-// ================= Mentee Register ================================
+
+// ================= Mentee Register Test ================================
 describe('should register a new mentee', () => {
   it('should return a JSON', async () => {
      const res = await request(server).post('/api/auth/register/mentee')
@@ -71,7 +71,7 @@ describe('should register a new mentee', () => {
       "city": "Brooklyn",
       "state": "New York",
       "password": "bucky",
-      "email": "WinterSoldier"
+      "email": "Wintersoldier@aol.com",
      });
      console.log(res.body);
      expect(res.type).toEqual('application/json');
