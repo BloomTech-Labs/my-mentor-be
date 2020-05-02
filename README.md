@@ -40,6 +40,15 @@ To get the server running locally:
 | PUT    | `/api/mentee/:menteeId` | user                | Modify an existing mentee by ID                    |
 | DELETE | `/api/mentee/:menteeId` | user                | Deletes everything dependent on the mentee         |
 
+#### Auth Routes
+
+| Method | Endpoint                | Access Control      | Description                                        |
+| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| POST   | `/api/register/mentor`  | user                | Register a new Mentor in db        
+| POST   | `/api/login/mentor`     | user          |     |   Login for Mentor                     
+| POST   | `/api/register/mentee`  | user                | Creates a new mentee by ID                         |
+| POST   | `/api/login/mentee`     | user                |      Login for Mentee                   | user                |
+
 # Data Model
 
 #### MENTORS
@@ -92,6 +101,8 @@ To get the server running locally:
 `updateMentor(mentorId, changes object)` -> Update a single mentor by ID
 
 `deleteMentor(mentorId)` -> Deletes everything dependent on the mentor
+
+`findMentor` -> Filters thru Mentor database and logs in user with correct email and password
 <br>
 <br>
 <br>
@@ -105,6 +116,8 @@ To get the server running locally:
 `updateMentee(menteeId, changes object)` -> Update a single mentee by ID
 
 `deleteMentee(menteeId)` -> Deletes everything dependent on the mentee
+
+`findMentee` -> Filters thru Mentee database and logs in user with correct email and password
 
 ## 3️⃣ Environment Variables
 
