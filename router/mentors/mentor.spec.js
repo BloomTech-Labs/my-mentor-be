@@ -15,16 +15,16 @@ const good_user_creds = {
     email: 'test',
     password: 'test'
 }
-const incomplete_creds = {
-    first_name: 'testuser',
-    last_name: 'testuser',
-    city: 'test',
-    state: 'test',
-    profession: 'test',
+const second_user_creds = {
+    first_name: 'testinguser',
+    last_name: 'testinguser',
+    city: 'testing',
+    state: 'testing',
+    profession: 'testing',
     image: 'test',
     description: 'test',
-    email: null,
-    password: 'test'
+    email: 'testing',
+    password: 'testing'
 }
 const updated_user_creds = {
     first_name: 'testuser',
@@ -41,6 +41,10 @@ const login = {
     email: 'test',
     password: 'test'
 }
+const log = {
+    email: 'tester',
+    password: 'tester'
+}
 
 
 beforeEach(async() => {
@@ -54,28 +58,12 @@ describe('Mentor Tests', () => {
         expect(1).toBe(1)
     })
     
-    describe('Registering a mentor', () => {
-        it('Register mentor with incomplete credentials', async() => {
-            const expectedStatusCode = 501;
-            let res = await request(server)
-                .post('/api/auth/register/mentor')
-                .send(incomplete_creds)
-            expect(res.status).toBe(expectedStatusCode)
-        })
-        it('Register mentor', async() => {
-            const expectedStatusCode = 201;
-            const res = await request(server)
-                .post('/api/auth/register/mentor')
-                .send(good_user_creds)
-            expect(res.status).toBe(expectedStatusCode)
-        })
-        it('Registering with the same credentials, expecting failure', async() => {
-            const expectedStatusCode = 501;
-            const res = await request(server)
-                .post('/api/auth/register/mentor')
-                .send(good_user_creds)
-            expect(res.status).toBe(expectedStatusCode)
-        })
+    it('Register mentor', async() => {
+        const expectedStatusCode = 201;
+        const res = await request(server)
+            .post('/api/auth/register/mentor')
+            .send(good_user_creds)
+        expect(res.status).toBe(expectedStatusCode)
     })
 
     describe('GET api/mentor', () => {
@@ -85,72 +73,93 @@ describe('Mentor Tests', () => {
             .post('/api/auth/login/mentor')
             .send(login)
             token = res.body.token;
-            console.log(token)
             let response = await request(server)
                 .get('/api/mentor')
-                .set('authorization', token)
+                .set('Authorization', token)
             expect(response.status).toBe(expectedStatusCode)
            
         })
-        // it('Returns a JSON', async() => {
-        //     await request(server)
-        //     .post('/api/auth/login/mentor')
-        //     .send(login)
-        //     token = res.body.token;
-        //     const res = await request(server)
-        //         .get('/api/mentor')
-        //         .set('Authorization', token)
-        //     expect(res.type).toMatch(/json/)
-        // })
+        it('Returns a JSON', async() => {
+            let res = await request(server)
+            .post('/api/auth/login/mentor')
+            .send(login)
+            token = res.body.token;
+            const response = await request(server)
+                .get('/api/mentor')
+                .set('Authorization', token)
+            expect(response.type).toMatch(/json/)
+        })
     })
-    // describe('GET api/mentor/:id', () => {
-    //     it('Returns all mentors by ID', async() => {
-    //         const expectedStatusCode = 200;
-    //         const res = await request(server)
-    //             .get('/api/mentor/1')
-    //             .set('Authorization', token)
-    //         expect(res.status).toBe(expectedStatusCode)
-    //     })
-    //     it('Returns a JSON', async() => {
-    //         const res = await request(server)
-    //             .get('/api/mentor')
-    //             .set('Content-Type', 'application/json')
-    //             .set('Authorization', token)
-    //             .expect('Content-Type', /json/)
-    //     })
-    // })
-    // describe('PUT api/mentor/:id', () => {
-    //     it('Modifies an existing mentor by ID', async() => {
-    //         const expectedStatusCode = 201;
-    //         const res = await request(server)
-    //             .put('/api/mentor/1')
-    //             .send(updated_user_creds)
-    //             .set('Authorization', token)
-    //         expect(res.status).toBe(expectedStatusCode)
-    //     })
-    //     it('Returns an error if mentor does not exist', async() => {
-    //         const expectedStatusCode = 404;
-    //         const res = await request(server)
-    //             .put('/api/mentor/2')
-    //             .send(updated_user_creds)
-    //             .set('Authorization', token)
-    //         expect(res.status).toBe(expectedStatusCode)
-    //     })
-    // })
-    // describe('DELETE /api/mentor/:id', () => {
-    //     it('Deletes everything dependent on the mentor', async() => {
-    //         const expectedStatusCode = 200;
-    //         const res = await request(server)
-    //             .delete('/api/mentor/1')
-    //             .set('Authorization', token)
-    //         expect(res.status).toBe(expectedStatusCode)
-    //     })
-    //     it('Returns an error if mentor does not exist', async() => {
-    //         const expectedStatusCode = 404;
-    //         const res = await request(server)
-    //             .delete('/api/mentor/2')
-    //             .set('Authorization', token)
-    //         expect(res.status).toBe(expectedStatusCode)
-    //     })
-    // })
+    describe('GET api/mentor/:id', () => {
+        it('Returns all mentors by ID', async() => {
+            const expectedStatusCode = 200;
+            let res = await request(server)
+            .post('/api/auth/login/mentor')
+            .send(login)
+            token = res.body.token;
+            const response = await request(server)
+                .get('/api/mentor/1')
+                .set('Authorization', token)
+            expect(response.status).toBe(expectedStatusCode)
+        })
+        it('Returns a JSON', async() => {
+            let res = await request(server)
+            .post('/api/auth/login/mentor')
+            .send(login)
+            token = res.body.token;
+            await request(server)
+                .get('/api/mentor')
+                .set('Content-Type', 'application/json')
+                .set('Authorization', token)
+                .expect('Content-Type', /json/)
+        })
+    })
+    describe('PUT api/mentor/:id', () => {
+        it('Modifies an existing mentor by ID', async() => {
+            const expectedStatusCode = 201;
+            let res = await request(server)
+            .post('/api/auth/login/mentor')
+            .send(login)
+          
+            const response = await request(server)
+                .put('/api/mentor/1')
+                .send(updated_user_creds)
+                .set('Authorization', res.body.token)
+                console.log(response.body)
+            expect(response.status).toBe(expectedStatusCode)
+        })
+    })
+    describe('DELETE /api/mentor/:id', () => {
+        it('Deletes everything dependent on the mentor', async() => {
+            const expectedStatusCode = 200;
+              await request(server)
+            .post('/api/auth/register/mentor')
+            .send(second_user_creds)
+     
+            let res = await request(server)
+            .post('/api/auth/login/mentor')
+            .send({
+                email: 'testing',
+                password: 'testing'
+            })
+         
+            const response = await request(server)
+                .delete('/api/mentor/1')
+                .set('Authorization', res.body.token)
+            expect(response.status).toBe(expectedStatusCode)
+        })
+        it('Returns a JSON', async() => {
+            let res = await request(server)
+            .post('/api/auth/login/mentor')
+            .send({
+                email: 'testing',
+                password: 'testing'
+            })
+            token = res.body.token
+            const response = await request(server)
+                .delete('/api/mentor/2')
+                .set({Authorization: token})
+                expect(response.type).toMatch(/json/)
+        })
+    })
 })
