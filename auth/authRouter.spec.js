@@ -11,6 +11,7 @@ async function createMentor(email, password) {
   const mentor = {
     email: email,
     password: bcrypt.hashSync(password, 8)
+    // password: password
   };
   await Mentor.addMentor(mentor)
 }
@@ -49,7 +50,7 @@ describe('should register a new mentor', () => {
 // ================= Mentor Login Test ================================
 describe('POST /login', () => {
   it('should accept valid credentials', async () => {
-      await createMentor("Hawkeye","arrow");
+      await createMentor("Hawkeye@gmail.com","arrow");
       const res = await request(server).post('/api/auth/login/mentor')
       .send({
           "email": "Hawkeye@gmail.com",

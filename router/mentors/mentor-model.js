@@ -6,7 +6,8 @@ module.exports = {
     addMentor,
     updateMentor,
     deleteMentor,
-    findMentor
+    findMentor,
+    findByMentorId
 };
 
 function getMentors() {
@@ -27,10 +28,17 @@ function findMentor(filter) {
 }
 
  
-function addMentor(user) {
-    return db('mentor')
-    .insert(user)
+async function addMentor(mentor) {
+    const [id] = await db('mentor').insert(mentor);
+
+    return findByMentorId(id);
 }
+
+function findByMentorId(id) {
+    return db('mentor')
+        .where({ id })
+        .first();
+};
 
 function updateMentor(id, changes) {
     return db('mentor')
