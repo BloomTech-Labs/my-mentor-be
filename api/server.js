@@ -2,9 +2,10 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const authRouter = require("../auth/auth-router");
 const server = express();
+const authorized = require('../auth/auth-middleware');
 
+const authRouter = require("../auth/auth-router");
 const userRouter = require('../router/users/users-router');
 const mentorRouter = require("../router/mentors/mentor-router");
 const menteeRouter = require("../router/mentees/mentees-router");
@@ -13,9 +14,9 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('/api/mentee', menteeRouter);
-server.use('/api/mentor', mentorRouter);
-server.use('/api/users', userRouter);
+server.use('/api/mentee', authorized, menteeRouter);
+server.use('/api/mentor', authorized, mentorRouter);
+server.use('/api/users', authorized, userRouter);
 server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => {
