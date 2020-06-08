@@ -44,10 +44,10 @@ To get the server running locally:
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| POST   | `/api/register/mentor`  | user                | Register a new Mentor in db        
-| POST   | `/api/login/mentor`     | user          |     |   Login for Mentor                     
-| POST   | `/api/register/mentee`  | user                | Creates a new mentee by ID                         |
-| POST   | `/api/login/mentee`     | user                |      Login for Mentee                   | user                |
+| POST   | `/api/auth/register/mentor`  | user                | Register a new Mentor in db        
+| POST   | `/api/auth/login/mentor`     | user          |     |   Login for Mentor                     
+| POST   | `/api/auth/register/mentee`  | user                | Creates a new mentee by ID                         |
+| POST   | `/api/auth/login/mentee`     | user                |      Login for Mentee                   | user                |
 
 # Data Model
 
