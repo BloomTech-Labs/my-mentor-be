@@ -31,6 +31,16 @@ To get the server running locally:
 | PUT    | `/api/mentor/:mentorId` | user           | Modify an existing mentor by ID.             |
 | DELETE | `/api/mentor/:mentorId` | user           | Deletes everything dependent on the mentor   |
 
+#### Mentor Posts Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/api/mentor/posts/all` | users          | Returns all mentors' posts                   |
+| GET    | `/api/mentor/:mentorId/posts` | users    | Returns a mentors' post                      |
+| POST   | `/api/mentor/:mentorId/posts` | users    | Adds a mentors' post                         |
+| PUT    | `/api/mentor/:mentorId/posts/:pid`| user | Modify an existing mentors' post             |
+| DELETE | `/api/mentor/:mentorId/posts/:pid` | user    | Deletes mentors' post                    |
+
 #### Mentee Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
@@ -39,6 +49,16 @@ To get the server running locally:
 | GET    | `/api/mentee/:menteeId` | all users           | Returns a single mentee by ID                      |
 | PUT    | `/api/mentee/:menteeId` | user                | Modify an existing mentee by ID                    |
 | DELETE | `/api/mentee/:menteeId` | user                | Deletes everything dependent on the mentee         |
+
+#### Mentee Posts Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| GET    | `/api/mentee/posts/all` | users          | Returns all mentees' posts                   |
+| GET    | `/api/mentee/:menteeId/posts` | users    | Returns a mentees' post                      |
+| POST   | `/api/mentee/:menteeId/posts` | users    | Adds a mentees' post                         |
+| PUT    | `/api/mentee/:menteeId/posts/:pid`| user | Modify an existing mentees' post             |
+| DELETE | `/api/mentee/:menteeId/posts/:pid` | user    | Deletes mentees' post                    |
 
 #### Auth Routes
 
@@ -70,6 +90,19 @@ To get the server running locally:
 }
 ```
 
+#### MENTOR POSTS
+
+---
+
+```
+{
+  id: UUID
+  mentor_id: ID
+  image: STRING
+  description: STRING
+}
+```
+
 #### MENTEES
 
 ---
@@ -86,6 +119,18 @@ To get the server running locally:
   description: STRING
   email: STRING
   password: STRING
+}
+```
+#### MENTOR POSTS
+
+---
+
+```
+{
+  id: UUID
+  mentor_id: ID
+  image: STRING
+  description: STRING
 }
 ```
 
