@@ -51,7 +51,7 @@ function deleteMentor(id) {
 function getMentorsPost() {
     return db('mentorPosts as mp')
     .join('mentor as m','m.id' ,'mp.mentor_id')
-    .select('m.first_name', 'm.last_name', 'mp.description', 'mp.mentor_id', "mp.id",'mp.image', 'm.city', 'm.state')
+    .select('m.first_name', 'm.last_name', 'mp.description', 'mp.mentor_id', "mp.id",'mp.image', 'm.city', 'm.state', 'mp.created_at')
 }
 
 function getMentorPost(id) {
