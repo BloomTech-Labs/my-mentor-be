@@ -6,7 +6,12 @@ module.exports = {
     addMentor,
     updateMentor,
     deleteMentor,
-    findMentor
+    findMentor,
+    getMentorsPost,
+    getMentorPost,
+    addMentorPost,
+    updateMentorPost,
+    deleteMentorPost
 };
 
 function getMentors() {
@@ -40,6 +45,35 @@ function updateMentor(id, changes) {
 
 function deleteMentor(id) {
     return db('mentor')
+    .where({id})
+    .del();
+}
+function getMentorsPost() {
+    return db('mentorPosts as mp')
+    .join('mentor as m','m.id' ,'mp.mentor_id')
+    .select('m.first_name', 'm.last_name', 'mp.description', 'mp.mentor_id', "mp.id",'mp.image', 'm.city', 'm.state')
+}
+
+function getMentorPost(id) {
+    return db('mentorPosts')
+    .join('mentor', 'mentor.id','mentorPosts.mentor_id')
+    .select('mentorPosts.*', 'mentor.first_name', 'mentor.last_name', 'mentor.city', 'mentor.state')
+    .where({'mentor.id': id})
+}
+
+function addMentorPost(post) {
+    return db('mentorPosts')
+    .insert(post)
+}
+
+function updateMentorPost(id, changes) {
+    return db('mentorPosts')
+    .where({id})
+    .update(changes)
+}
+
+function deleteMentorPost(id) {
+    return db('mentorPosts')
     .where({id})
     .del();
 }
