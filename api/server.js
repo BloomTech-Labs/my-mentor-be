@@ -10,6 +10,22 @@ const userRouter = require('../router/users/users-router');
 const mentorRouter = require("../router/mentors/mentor-router");
 const menteeRouter = require("../router/mentees/mentees-router");
 
+//Socket.io
+const socketIo = require('socket.io');
+const http = require('http');
+var app = http.createServer(server);
+var io = socketIo(app);
+
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  // socket.on('join', function(data) {
+  //   console.log('user connected inside join');
+  //   console.log('room_uid is', data.socket_uid);
+  //   console.log('message body is ', data.body);
+  // })
+})
+
 server.use(helmet());
 server.use(cors());
 server.use(express.json());

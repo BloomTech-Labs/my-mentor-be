@@ -92,7 +92,7 @@ exports.up = function(knex) {
             .notNullable()
         comments.timestamps(true, true)
     })
-    .createTable('Users', users => {
+    .createTable('Admin', users => {
         users.integer('menteeID')
             .unsigned()
             .notNullable()
@@ -108,11 +108,36 @@ exports.up = function(knex) {
             .onDelete('RESTRICT')
             .onUpdate('CASCADE');
     })
+    .createTable('conversation', conversation => {
+        conversation.increments()
+        conversation.string('user_1')
+            .notNullable()
+        conversation.string('user_2')
+            .notNullable()
+    })
+    .createTable('messages', message => {
+        message.increments()
+        message.integer('conversation_id')
+            .unsigned()
+            .notNullable()
+            .references('id')
+            .inTable('conversation')
+            .onDelete('RESTRICT')
+            .onUpdate('CASCADE');
+        message.string('user_to')
+            .notNullable()
+        message.string('user_from')
+            .notNullable()
+        message.string('body', 255)
+        message.timestamps(true, true)
+    })
 };
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists('Users')
+        .dropTableIfExists('Messages')
+        .dropTableIfExists('Conversation')
+        .dropTableIfExists('Admin')
         .dropTableIfExists('mentorComments')
         .dropTableIfExists('mentorPosts')
         .dropTableIfExists('mentor')
