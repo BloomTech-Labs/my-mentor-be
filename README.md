@@ -168,6 +168,7 @@ To get the server running locally:
   user_to: STRING
   body: STRING
 }
+```
 
 ## Actions
 
