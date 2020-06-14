@@ -9,6 +9,8 @@ const authRouter = require("../auth/auth-router");
 const userRouter = require('../router/users/users-router');
 const mentorRouter = require("../router/mentors/mentor-router");
 const menteeRouter = require("../router/mentees/mentees-router");
+const conversationRouter = require('../router/conversations/conversation-router');
+const messageRouter = require('../router/messages/message-router')
 
 //Socket.io
 const socketIo = require('socket.io');
@@ -30,9 +32,11 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
+server.use('/api/message', messageRouter);
+server.use('/api/conversation', conversationRouter);
 server.use('/api/mentee', authorized, menteeRouter);
 server.use('/api/mentor', authorized, mentorRouter);
-server.use('/api/users', authorized, userRouter);
+server.use('/api/admin', authorized, userRouter); //not created for RC2
 server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => {
