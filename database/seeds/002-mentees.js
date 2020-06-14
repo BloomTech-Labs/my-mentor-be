@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
 
 const hashAaron = bcrypt.hashSync(process.env.USER, 10)
