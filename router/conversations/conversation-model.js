@@ -21,7 +21,10 @@ function findConversation(id) {
 }
 function addConversation(convo) {
     return db('conversation')
-    insert(convo)
+    .insert(convo, 'id')
+    .then(([id]) => {
+        return getAllConversation(id)
+    });
 }
 
 function deleteConversation(id) {
@@ -40,7 +43,10 @@ function getMessages(id) {
 
 function addMessage(message) {
     return db('messages')
-    .insert(message);
+    .insert(message, "id")
+    .then(([id]) => {
+        return getMessages(id)
+    });
 }
 
 function deleteMessage(id) {
