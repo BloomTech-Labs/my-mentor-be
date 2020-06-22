@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "test": "cross-env DB_ENV=testing jest --watch"
+    "test": "cross-env DB_ENV=testing jest --watch",
+    "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,15 @@
     "supertest": "^4.0.2"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+			"**/*.js",
+			"!**/node_modules/**",
+			"!**/vendo/**",
+      "!**/tests/**",
+      "!**/spec/**",
+      "!**/*.spec.{js, jsx}",
+      "!**/database/**"
+		]
   }
 }
