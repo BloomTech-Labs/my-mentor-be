@@ -62,22 +62,22 @@ describe('should register a new mentor', () => {
 // }); 
 
 // ================= Mentee Register Test ================================
-describe('should register a new mentee', () => {
-  it('should return a JSON', async () => {
-     const res = await request(server).post('/api/auth/register/mentee')
-     .send({
-      "first_name": "James",
-      "last_name": "Buchanan",
-      "city": "Brooklyn",
-      "state": "New York",
-      "password": "bucky",
-      "email": "Wintersoldiers@aol.com",
-     });
-     console.log(res.body);
-     expect(res.type).toEqual('application/json');
-     expect(res.status).toEqual(201);
-  })
-});
+// describe('should register a new mentee', () => {
+//   it('should return a JSON', async () => {
+//      const res = await request(server).post('/api/auth/register/mentee')
+//      .send({
+//       "first_name": "James",
+//       "last_name": "Buchanan",
+//       "city": "Brooklyn",
+//       "state": "New York",
+//       "password": "bucky",
+//       "email": "Wintersoldiers@aol.com",
+//      });
+//      console.log(res.body);
+//      expect(res.type).toEqual('application/json');
+//      expect(res.status).toEqual(201);
+//   })
+// });
 // ============================================================================
 beforeEach( async () => {
    await db ('mentor', 'mentee').truncate();
