@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "test": "cross-env DB_ENV=testing jest --watch",
-    "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
+    "test": "cross-env DB_ENV=testing jest --verbose --runInBand --forceExit",
+    "coverage": "jest --coverage --detectOpenHandles --forceExit"
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "verbose": true,
     "collectCoverageFrom": [
 			"**/*.js",
 			"!**/node_modules/**",
