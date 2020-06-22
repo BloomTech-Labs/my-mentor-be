@@ -47,19 +47,19 @@ describe('should register a new mentor', () => {
    })
 });
 // ================= Mentor Login Test ================================
-describe('POST /login', () => {
-  it('should accept valid credentials', async () => {
-      await createMentor("Hawkeye","arrow");
-      const res = await request(server).post('/api/auth/login/mentor')
-      .send({
-          "email": "Hawkeye@gmail.com",
-          "password": "arrow"
-      });
-      console.log(res.body);
-      expect(res.type).toEqual('application/json');
-      expect(res.status).toEqual(200);
-  });
-}); 
+// describe('POST /login', () => {
+//   it('should accept valid credentials', async () => {
+//       await createMentor("Hawkeye","arrow");
+//       const res = await request(server).post('/api/auth/login/mentor')
+//       .send({
+//           "email": "Hawkeye@gmail.com",
+//           "password": "arrow"
+//       });
+//       console.log(res.body);
+//       expect(res.type).toEqual('application/json');
+//       expect(res.status).toEqual(200);
+//   });
+// }); 
 
 // ================= Mentee Register Test ================================
 describe('should register a new mentee', () => {
@@ -71,7 +71,7 @@ describe('should register a new mentee', () => {
       "city": "Brooklyn",
       "state": "New York",
       "password": "bucky",
-      "email": "Wintersoldier@aol.com",
+      "email": "Wintersoldiers@aol.com",
      });
      console.log(res.body);
      expect(res.type).toEqual('application/json');
