@@ -1,9 +1,9 @@
 
 # API Documentation
 
-#### 1️⃣ Backend deployed at [mentor-be](https://mentor-be.herokuapp.com/) <br>
+#### Backend deployed at [mentor-be](https://mentor-be.herokuapp.com/) <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
 
@@ -19,7 +19,7 @@ To get the server running locally:
 -    Point Three
 -    Point Four
 
-## 2️⃣ Endpoints
+## Endpoints
 
 
 #### Mentor Routes
@@ -64,10 +64,21 @@ To get the server running locally:
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| POST   | `/api/register/mentor`  | user                | Register a new Mentor in db        
-| POST   | `/api/login/mentor`     | user          |     |   Login for Mentor                     
+| POST   | `/api/register/mentor`  | user                | Register a new Mentor in db                        |
+| POST   | `/api/login/mentor`     | user                | Login for Mentor                                   |
 | POST   | `/api/register/mentee`  | user                | Creates a new mentee by ID                         |
-| POST   | `/api/login/mentee`     | user                |      Login for Mentee                   | user                |
+| POST   | `/api/login/mentee`     | user                | Login for Mentee                                   |
+
+#### Messaging Routes
+
+| Method | Endpoint                | Access Control      | Description                                        |
+| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| GET    | `/api/conversation`     | user                | Returns all conversations                          |
+| POST   | `/api/conversation`     | user                | Adds a conversation                                |
+| DELETE | `/api/conversation/:id` | user                | Deletes a conversation                             |
+| GET   | `/api/conversation/:id/messages`| user         | Returns all messages from conversation             |
+| POST    | `/api/conversations/:id/messages`| user      | Adds messages to existing conversation             |
+| DELETE | `/api/conversations/:id/messages/:mid`| user  | Deletes message from conversation                  |
 
 # Data Model
 
@@ -121,20 +132,45 @@ To get the server running locally:
   password: STRING
 }
 ```
-#### MENTOR POSTS
+#### MENTEE POSTS
 
 ---
 
 ```
 {
   id: UUID
-  mentor_id: ID
+  mentee_id: ID
   image: STRING
   description: STRING
 }
 ```
+#### CONVERSATION
 
-## 2️⃣ Actions
+---
+
+```
+{
+  id: UUID
+  user_1: STRING
+  user_2: STRING
+}
+```
+
+#### MESSAGES
+
+---
+
+```
+{
+  id: UUID
+  conversation_id: ID
+  user_from: STRING
+  user_to: STRING
+  body: STRING
+}
+```
+
+## Actions
 
 
 `getMentors()` -> Returns all mentors
@@ -164,7 +200,7 @@ To get the server running locally:
 
 `findMentee` -> Filters thru Mentee database and logs in user with correct email and password
 
-## 3️⃣ Environment Variables
+## Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
 
