@@ -48,7 +48,7 @@
     "collectCoverageFrom": [
 			"**/*.js",
 			"!**/node_modules/**",
-			"!**/vendo/**",
+			"!**/vendor/**",
       "!**/tests/**",
       "!**/spec/**",
       "!**/*.spec.{js, jsx}",

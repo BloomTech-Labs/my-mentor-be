@@ -3,6 +3,9 @@
 
 #### Backend deployed at [mentor-be](https://mentor-be.herokuapp.com/) <br>
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/395dce14b2d85ae0be1d/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/my-mentor-be/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/395dce14b2d85ae0be1d/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/my-mentor-be/test_coverage)
+
 ## Getting started
 
 To get the server running locally:
