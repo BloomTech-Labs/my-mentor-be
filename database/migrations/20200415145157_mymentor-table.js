@@ -18,7 +18,7 @@ exports.up = function(knex) {
             .unique();
         users.string('title', 30)
         users.string('image')
-        users.string('description', 255);
+        users.string('description', 250);
     })
     .createTable('menteePosts', posts => {
         posts.increments();
