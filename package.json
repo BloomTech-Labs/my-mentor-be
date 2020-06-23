@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "test": "cross-env DB_ENV=testing jest --verbose --runInBand --forceExit",
+    "test": "cross-env DB_ENV=testing jest --watch"
+    
+    ,
     "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
   },
   "repository": {
