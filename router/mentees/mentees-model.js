@@ -16,12 +16,12 @@ module.exports = {
 
 function getMentees() {
     return db('mentee')
-    .select('id', 'first_name', 'last_name', 'city', 'state', 'email', 'image', 'description');
+    .select('id', 'first_name', 'last_name', 'city', 'state', 'title', 'email', 'image', 'description');
 };
 
 function getMentee(id) {
     return db('mentee')
-    .select('id', 'first_name', 'last_name', 'city', 'state', 'email', 'image', 'description')
+    .select('id', 'first_name', 'last_name', 'city', 'state', 'title', 'email', 'image', 'description')
     .where({id})
     .first();
 };
